@@ -1,0 +1,58 @@
+﻿<Window x:Class="WPFNotepad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFNotepad"
+        xmlns:viewmodels="clr-namespace:WPFNotepad.ViewModels"
+        mc:Ignorable="d"
+        Title="GKEdit" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel Margin="1">
+        <Menu DockPanel.Dock="Top" Background="White">
+            <Menu.Items>
+                <MenuItem Header="_FILE" DataContext="{Binding File}" Padding="8,0,8,0">
+                    <MenuItem Header="_New" InputGestureText="Ctrl+N" Command="{Binding NewCommand}"/>
+                    <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding OpenCommand}"/>
+                    <MenuItem Header="_Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"/>
+                    <MenuItem Header="Save _As..." InputGestureText="Ctrl+Shift+S" Command="{Binding SaveAsCommand}"/>
+                </MenuItem>
+                <MenuItem Header="_EDIT" DataContext="{Binding Editor}" Padding="8,0,8,0">
+                    <MenuItem Header="_Format" InputGestureText="Ctrl+Shift+F" Command="{Binding FormatCommand}"/>
+                    <MenuItem Header="Word _Wrap" Command="{Binding WrapCommand}" IsChecked="{Binding Format.isWrapped}"/>
+                </MenuItem>
+                <MenuItem Header="HELP" DataContext="{Binding Help}" Padding="8,0,8,0">
+                    <MenuItem Header="About" Command="{Binding HelpCommand}"/>
+                </MenuItem>
+            </Menu.Items>
+        </Menu>
+
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock DockPanel.Dock="Bottom" 
+                       DataContext="{Binding File.Document}"
+                       Text="{Binding FilePath}"/>
+                    
+                </StatusBarItem>
+                
+                
+            </StatusBar>
+
+            <TextBox DockPanel.Dock="Top"
+                     VerticalScrollBarVisibility="Visible"
+                     DataContext="{Binding Editor}"
+                     FontFamily="{Binding Format.Family}"
+                     FontSize="{Binding Format.Size}"
+                     FontStyle="{Binding Format.Style}"
+                     FontWeight="{Binding Format.Weight}"
+                     TextWrapping="{Binding Format.Wrap}"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Text="{Binding Document.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+    </DockPanel>
+</Window>
