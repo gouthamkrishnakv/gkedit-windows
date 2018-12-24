@@ -85,8 +85,8 @@
     <Compile Include="HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Methods\XmlPareser\MySerializer.cs" />
-    <Compile Include="Methods\XmlPareser\XMLSerialization.cs" />
+    <Compile Include="Methods\XmlParser\MySerializer.cs" />
+    <Compile Include="Methods\XmlParser\XMLSerialization.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\EditorViewModel.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
